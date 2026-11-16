@@ -1,0 +1,6 @@
+{
+  "name": "Edebiyat & Türkçe Online Test Portalı",
+  "description": "TYT Türkçe ve AYT Edebiyat konuları için 10 soruluk ikişer testten oluşan kapsamlı online sınav ve konu tarama platformu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
