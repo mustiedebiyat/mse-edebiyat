@@ -34,6 +34,7 @@ import {
   getTopicProgress,
 } from '../utils/storage';
 import { evaluateBadges } from '../utils/badges';
+import { NetProgressionChart } from './NetProgressionChart';
 
 interface UserProfileViewProps {
   profile: UserProfile;
@@ -305,6 +306,9 @@ export const UserProfileView: React.FC<UserProfileViewProps> = ({
           </div>
         </div>
       </section>
+
+      {/* Net Progression Line Chart (Last 10 Tests) */}
+      <NetProgressionChart attempts={attempts} />
 
       {/* Achievement Badges Section */}
       <section className="bg-white border border-slate-200 rounded-xl p-6 space-y-6">

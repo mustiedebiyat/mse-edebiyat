@@ -1,13 +1,14 @@
 import React from 'react';
 
-export type ActiveView = 'catalog' | 'quiz' | 'profile' | 'install';
+export type ActiveView = 'home' | 'topics' | 'quiz' | 'profile' | 'install';
 export type CatalogFilter = 'ALL' | 'TYT' | 'AYT';
 
 interface HeaderProps {
   activeView: ActiveView;
   catalogFilter: CatalogFilter;
   hasActiveQuiz: boolean;
-  onNavigateCatalog: (filter: CatalogFilter) => void;
+  onNavigateHome: () => void;
+  onNavigateTopics: (filter: CatalogFilter) => void;
   onNavigateProfile: () => void;
   onPrimaryAction: () => void;
 }
@@ -16,19 +17,20 @@ export const Header: React.FC<HeaderProps> = ({
   activeView,
   catalogFilter,
   hasActiveQuiz,
-  onNavigateCatalog,
+  onNavigateHome,
+  onNavigateTopics,
   onNavigateProfile,
   onPrimaryAction,
 }) => {
-  const isAllActive = activeView === 'catalog' && catalogFilter === 'ALL';
-  const isTytActive = activeView === 'catalog' && catalogFilter === 'TYT';
-  const isAytActive = activeView === 'catalog' && catalogFilter === 'AYT';
+  const isHomeActive = activeView === 'home';
+  const isTytActive = activeView === 'topics' && catalogFilter === 'TYT';
+  const isAytActive = activeView === 'topics' && catalogFilter === 'AYT';
   const isProfileActive = activeView === 'profile';
 
   const linkClass = (active: boolean) =>
     `text-sm font-medium transition-colors whitespace-nowrap shrink-0 py-1 border-b-2 ${
       active
-        ? 'text-[#2C4A70] border-[#2C4A70]'
+        ? 'text-[#4B2E6B] border-[#4B2E6B]'
         : 'text-slate-600 border-transparent hover:text-slate-900 hover:border-slate-300'
     }`;
 
@@ -37,9 +39,9 @@ export const Header: React.FC<HeaderProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-8">
         <button
           type="button"
-          onClick={() => onNavigateCatalog('ALL')}
+          onClick={onNavigateHome}
           title="Mustafa Şahin Edebiyat (Edebiyat ve Türkçe)"
-          className="font-display text-xl font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4A70] rounded"
+          className="font-display text-xl font-bold tracking-tight text-[#462963] whitespace-nowrap shrink-0 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4B2E6B] rounded"
         >
           MSE
         </button>
@@ -50,21 +52,21 @@ export const Header: React.FC<HeaderProps> = ({
         >
           <button
             type="button"
-            onClick={() => onNavigateCatalog('ALL')}
-            className={linkClass(isAllActive)}
+            onClick={onNavigateHome}
+            className={linkClass(isHomeActive)}
           >
-            Tüm Konular
+            Ana Sayfa
           </button>
           <button
             type="button"
-            onClick={() => onNavigateCatalog('TYT')}
+            onClick={() => onNavigateTopics('TYT')}
             className={linkClass(isTytActive)}
           >
             TYT Türkçe
           </button>
           <button
             type="button"
-            onClick={() => onNavigateCatalog('AYT')}
+            onClick={() => onNavigateTopics('AYT')}
             className={linkClass(isAytActive)}
           >
             AYT Edebiyat
@@ -89,7 +91,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             type="button"
             onClick={onPrimaryAction}
-            className="px-4 py-2 text-xs sm:text-sm font-medium text-white bg-[#2C4A70] rounded-lg hover:bg-[#223B5B] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2C4A70] focus-visible:ring-offset-2"
+            className="px-4 py-2 text-xs sm:text-sm font-medium text-white bg-[#4B2E6B] rounded-lg hover:bg-[#3A2254] transition-colors whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4B2E6B] focus-visible:ring-offset-2"
           >
             {hasActiveQuiz && activeView !== 'quiz' ? 'Teste Dön' : 'Rastgele Test'}
           </button>

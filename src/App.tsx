@@ -28,6 +28,7 @@ import {
 } from './utils/storage';
 import { getNewlyUnlockedBadges } from './utils/badges';
 import { Header, type ActiveView, type CatalogFilter } from './components/Header';
+import { HomeView } from './components/HomeView';
 import { TopicCatalog } from './components/TopicCatalog';
 import { TestSetupModal } from './components/TestSetupModal';
 import { QuizRunner } from './components/QuizRunner';
@@ -62,9 +63,9 @@ function isInstallRouteRequested(): boolean {
 
 export default function App() {
   const [activeView, setActiveView] = useState<ActiveView>(() =>
-    isInstallRouteRequested() ? 'install' : 'catalog'
+    isInstallRouteRequested() ? 'install' : 'home'
   );
-  const [catalogFilter, setCatalogFilter] = useState<CatalogFilter>('ALL');
+  const [catalogFilter, setCatalogFilter] = useState<CatalogFilter>('TYT');
   const [profile, setProfile] = useState<UserProfile>(() => loadUserProfile());
   const [attempts, setAttempts] = useState<TestAttemptRecord[]>(() =>
     loadAttempts()
@@ -175,9 +176,9 @@ export default function App() {
     }
 
     const pool =
-      catalogFilter === 'ALL'
-        ? ALL_TOPICS
-        : ALL_TOPICS.filter((t) => t.exam === catalogFilter);
+      activeView === 'topics' && catalogFilter !== 'ALL'
+        ? ALL_TOPICS.filter((t) => t.exam === catalogFilter)
+        : ALL_TOPICS;
     const chosenTopic = pool[Math.floor(Math.random() * pool.length)] || ALL_TOPICS[0];
 
     startQuizWithConfig({
@@ -220,10 +221,15 @@ export default function App() {
         activeView={activeView}
         catalogFilter={catalogFilter}
         hasActiveQuiz={hasOngoingQuiz}
-        onNavigateCatalog={(filter) => {
+        onNavigateHome={() => {
+          clearInstallQueryParam();
+          setActiveView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onNavigateTopics={(filter) => {
           clearInstallQueryParam();
           setCatalogFilter(filter);
-          setActiveView('catalog');
+          setActiveView('topics');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onNavigateProfile={() => {
@@ -238,7 +244,24 @@ export default function App() {
       />
 
       <div className="flex-1">
-        {activeView === 'catalog' && (
+        {activeView === 'home' && (
+          <HomeView
+            topics={ALL_TOPICS}
+            profile={profile}
+            attempts={attempts}
+            onSelectExam={(exam) => {
+              setCatalogFilter(exam);
+              setActiveView('topics');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onOpenProfile={() => {
+              setActiveView('profile');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+          />
+        )}
+
+        {activeView === 'topics' && (
           <TopicCatalog
             topics={ALL_TOPICS}
             filter={catalogFilter}
@@ -247,8 +270,8 @@ export default function App() {
             onSelectTopicTest={(topic, initialDifficulty = 'orta') =>
               setSetupTarget({ topic, difficulty: initialDifficulty })
             }
-            onOpenProfile={() => {
-              setActiveView('profile');
+            onBackHome={() => {
+              setActiveView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />
@@ -276,7 +299,7 @@ export default function App() {
             onFinish={handleFinishQuiz}
             onExit={() => {
               setSession(null);
-              setActiveView('catalog');
+              setActiveView('topics');
             }}
           />
         )}
@@ -300,7 +323,7 @@ export default function App() {
             }
             onBackToCatalog={() => {
               setSession(null);
-              setActiveView('catalog');
+              setActiveView('topics');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             onOpenProfile={() => {
@@ -314,7 +337,7 @@ export default function App() {
           <InstallLandingView
             onContinueToTests={() => {
               clearInstallQueryParam();
-              setActiveView('catalog');
+              setActiveView('home');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           />

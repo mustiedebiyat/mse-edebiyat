@@ -4,7 +4,7 @@ export const AYT_TOPICS_5_6: Topic[] = [
   {
     id: 'ayt-milli-edebiyat',
     exam: 'AYT',
-    order: 5,
+    order: 6,
     title: 'Millî Edebiyat Dönemi',
     description:
       'Yeni Lisan hareketi, Genç Kalemler, Türkçülük akımı, beş hececilerin doğuşu ve dönemin bağımsız güçlü kalemleri.',
@@ -431,7 +431,7 @@ export const AYT_TOPICS_5_6: Topic[] = [
   {
     id: 'ayt-cumhuriyet',
     exam: 'AYT',
-    order: 6,
+    order: 7,
     title: 'Cumhuriyet Dönemi Türk Edebiyatı',
     description:
       'Saf şiir, Yedi Meşaleciler, Garip (I. Yeni), İkinci Yeni, Toplumcu Gerçekçiler, Hisarcılar ve Modern/Postmodern Roman.',

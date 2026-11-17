@@ -5,6 +5,8 @@ import { TYT_TOPICS_5_6 } from './tytTopic5_6';
 import { AYT_TOPICS_1_2 } from './aytTopic1_2';
 import { AYT_TOPICS_3_4 } from './aytTopic3_4';
 import { AYT_TOPICS_5_6 } from './aytTopic5_6';
+import { AYT_TOPIC_7_HALK } from './aytTopic7_halk';
+import { AYT_TOPIC_9_AKIMLAR } from './aytTopic9_akimlar';
 
 export const ALL_TOPICS: Topic[] = [
   ...TYT_TOPICS_1_2,
@@ -13,6 +15,8 @@ export const ALL_TOPICS: Topic[] = [
   ...AYT_TOPICS_1_2,
   ...AYT_TOPICS_3_4,
   ...AYT_TOPICS_5_6,
+  ...AYT_TOPIC_7_HALK,
+  AYT_TOPIC_9_AKIMLAR,
 ];
 
 export const DIFFICULTY_LEVELS: DifficultyLevel[] = ['kolay', 'orta', 'zor'];
