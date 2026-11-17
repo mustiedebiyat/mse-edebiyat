@@ -1,5 +1,18 @@
 import React from 'react';
-import { ArrowRight, Award, BookOpen, User } from 'lucide-react';
+import {
+  AlignLeft,
+  ArrowRight,
+  Award,
+  BookOpen,
+  BookOpenText,
+  Drama,
+  Feather,
+  MessageSquareQuote,
+  Puzzle,
+  ScrollText,
+  SpellCheck,
+  User,
+} from 'lucide-react';
 import type { TestAttemptRecord, Topic, UserProfile } from '../types/quiz';
 import { computeOverallStats } from '../utils/storage';
 import { evaluateBadges } from '../utils/badges';
@@ -66,21 +79,82 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <button
             type="button"
             onClick={() => onSelectExam('TYT')}
-            className="group text-left rounded-2xl p-6 bg-[#EDE3F7] hover:bg-[#E4D5F3] border border-[#CFBBE7] transition-colors flex flex-col justify-between gap-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3A7A]"
+            className="group relative overflow-hidden text-left rounded-2xl p-6 bg-[#EDE3F7] hover:bg-[#E4D5F3] border border-[#CFBBE7] transition-colors flex flex-col justify-between gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3A7A]"
           >
-            <div className="space-y-2">
-              <p className="text-xs font-mono font-semibold text-[#6A488C]">
-                {tytTopicCount} Konu · {tytQuestionCount} Soru · %{stats.tytPercentage} İlerleme
-              </p>
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#3F235C]">
-                TYT Türkçe
-              </h3>
+            {/* Belirgin dekoratif arka plan motifi */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 120 120"
+              className="pointer-events-none absolute -right-3 -top-3 w-32 h-32 text-[#462963] opacity-[0.14] transition-transform duration-300 group-hover:scale-105"
+              fill="none"
+            >
+              <path
+                d="M22 30c14-6 28-4 38 4 10-8 24-10 38-4v56c-14-6-28-4-38 4-10-8-24-10-38-4V30z"
+                stroke="currentColor"
+                strokeWidth="4.5"
+                strokeLinejoin="round"
+              />
+              <path d="M60 34v56" stroke="currentColor" strokeWidth="4" />
+              <path
+                d="M32 48h16M32 60h14M72 48h16M72 60h14"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+            </svg>
+
+            <div className="relative space-y-4">
+              <div>
+                <p className="text-xs font-mono font-semibold text-[#6A488C]">
+                  {tytTopicCount} Konu · {tytQuestionCount} Soru · %{stats.tytPercentage} İlerleme
+                </p>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#3F235C] mt-1">
+                  TYT Türkçe
+                </h3>
+              </div>
+
+              {/* Başlık altı belirgin ve yüksek kontrastlı simgeler */}
+              <div className="grid grid-cols-4 gap-2.5 py-1" aria-hidden="true">
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#4B2E6B] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-0.5">
+                    <MessageSquareQuote className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#3F235C] leading-tight">
+                    Anlam
+                  </span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#4B2E6B] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 delay-50 group-hover:-translate-y-0.5">
+                    <AlignLeft className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#3F235C] leading-tight">
+                    Paragraf
+                  </span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#4B2E6B] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 delay-75 group-hover:-translate-y-0.5">
+                    <SpellCheck className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#3F235C] leading-tight">
+                    Yazım
+                  </span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#4B2E6B] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 delay-100 group-hover:-translate-y-0.5">
+                    <Puzzle className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#3F235C] leading-tight">
+                    Dil Bilgisi
+                  </span>
+                </div>
+              </div>
+
               <p className="text-sm text-[#4F366A] leading-relaxed">
                 Anlam bilgisi, paragraf, ses, yazım, noktalama ve dil bilgisi testleri.
               </p>
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-[#462963]/12 text-sm font-semibold text-[#462963]">
+            <div className="relative flex items-center justify-between pt-3 border-t border-[#462963]/12 text-sm font-semibold text-[#462963]">
               <span className="inline-flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
                 TYT Konularını Aç
@@ -93,21 +167,81 @@ export const HomeView: React.FC<HomeViewProps> = ({
           <button
             type="button"
             onClick={() => onSelectExam('AYT')}
-            className="group text-left rounded-2xl p-6 bg-[#FCEBD9] hover:bg-[#F8DFC6] border border-[#ECC49D] transition-colors flex flex-col justify-between gap-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C2591D]"
+            className="group relative overflow-hidden text-left rounded-2xl p-6 bg-[#FCEBD9] hover:bg-[#F8DFC6] border border-[#ECC49D] transition-colors flex flex-col justify-between gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C2591D]"
           >
-            <div className="space-y-2">
-              <p className="text-xs font-mono font-semibold text-[#9E4918]">
-                {aytTopicCount} Konu · {aytQuestionCount} Soru · %{stats.aytPercentage} İlerleme
-              </p>
-              <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#7A350E]">
-                AYT Edebiyat
-              </h3>
+            {/* Belirgin dekoratif arka plan motifi */}
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 120 120"
+              className="pointer-events-none absolute -right-3 -top-3 w-32 h-32 text-[#8C3D12] opacity-[0.14] transition-transform duration-300 group-hover:scale-105"
+              fill="none"
+            >
+              <path
+                d="M88 22c-22 4-42 22-50 48l-8 26 26-8c26-8 44-28 48-50-5-5-11-11-16-16z"
+                stroke="currentColor"
+                strokeWidth="4.5"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M30 96L76 50"
+                stroke="currentColor"
+                strokeWidth="4"
+                strokeLinecap="round"
+              />
+            </svg>
+
+            <div className="relative space-y-4">
+              <div>
+                <p className="text-xs font-mono font-semibold text-[#9E4918]">
+                  {aytTopicCount} Konu · {aytQuestionCount} Soru · %{stats.aytPercentage} İlerleme
+                </p>
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#7A350E] mt-1">
+                  AYT Edebiyat
+                </h3>
+              </div>
+
+              {/* Başlık altı belirgin ve yüksek kontrastlı simgeler */}
+              <div className="grid grid-cols-4 gap-2.5 py-1" aria-hidden="true">
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#C2591D] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 group-hover:-translate-y-0.5">
+                    <Feather className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#7A350E] leading-tight">
+                    Şiir
+                  </span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#C2591D] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 delay-50 group-hover:-translate-y-0.5">
+                    <ScrollText className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#7A350E] leading-tight">
+                    Halk &amp; Divan
+                  </span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#C2591D] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 delay-75 group-hover:-translate-y-0.5">
+                    <BookOpenText className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#7A350E] leading-tight">
+                    Dönemler
+                  </span>
+                </div>
+                <div className="flex flex-col items-center gap-1.5 text-center">
+                  <span className="w-12 h-12 rounded-2xl bg-[#C2591D] text-white shadow-sm ring-2 ring-white/80 flex items-center justify-center transition-transform duration-200 delay-100 group-hover:-translate-y-0.5">
+                    <Drama className="w-6 h-6 stroke-[2.2]" />
+                  </span>
+                  <span className="text-xs font-bold text-[#7A350E] leading-tight">
+                    Akımlar
+                  </span>
+                </div>
+              </div>
+
               <p className="text-sm text-[#6E3B1D] leading-relaxed">
                 Şiir bilgisi, halk, divan, tanzimat, servetifünun, millî, cumhuriyet ve edebi akımlar.
               </p>
             </div>
 
-            <div className="flex items-center justify-between pt-3 border-t border-[#7A350E]/12 text-sm font-semibold text-[#8C3D12]">
+            <div className="relative flex items-center justify-between pt-3 border-t border-[#7A350E]/12 text-sm font-semibold text-[#8C3D12]">
               <span className="inline-flex items-center gap-2">
                 <BookOpen className="w-4 h-4" />
                 AYT Konularını Aç
